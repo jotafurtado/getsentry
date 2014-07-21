@@ -1,6 +1,7 @@
 {
     "name": "jcf/getsentry",
-    "description": "",
+    "description": "Sentry Integration for Laravel 4",
+    "license": "MIT",
     "authors": [
         {
             "name": "João Carlos",
