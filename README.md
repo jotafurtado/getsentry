@@ -26,7 +26,7 @@ php composer.phar update
 After updating composer, add the ServiceProvider to the providers array in app/config/app.php
 
 ```php
-'Jcf\Getsentry\GeocodeServiceProvider',
+'Jcf\Getsentry\GetsentryServiceProvider',
 ```
 
 ## Usage
