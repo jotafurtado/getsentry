@@ -1,4 +1,4 @@
-# Super Simple Sentry Integration for Laravel 4
+# Sentry Integration for Laravel 4
 
 Sentry (getsentry.com) and Laravel 4 integration.
 
