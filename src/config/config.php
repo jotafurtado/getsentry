@@ -19,7 +19,7 @@ return array(
     | Environments that should report logs to Sentry
     |
     */
-	'environments' => ['production'],
+	'environments' => ['environment'],
 
 	/*
     |--------------------------------------------------------------------------
