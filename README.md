@@ -1,7 +1,7 @@
 # Sentry Integration for Laravel 4
 
 Sentry (getsentry.com) and Laravel 4 integration.
-Automatically sent Laravel log messages to Sentry. This package integrates Sentry and Laravel 4 in a super simple way. Let's see how it works.
+Automatically send Laravel log messages to Sentry. This package integrates Sentry and Laravel 4 in a super simple way. Let's see how it works.
 
 ## Installation
 
@@ -79,7 +79,7 @@ If you need, you may also trigger Laravel log mannualy and pass extra data to Se
     \Log::debug('Debug bug!', ['user' => 'jotafurtado']);
 
     // Info with User
-    \Log::info('User has logged in.', ['user' => jotafurtado]);
+    \Log::info('User has logged in.', ['user' => 'jotafurtado']);
 
     // Simple Error
     \Log::error('Image not saved.');
