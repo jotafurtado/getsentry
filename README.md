@@ -11,7 +11,7 @@ The package can be installed via [Composer](http://getcomposer.org) by requiring
 ```json
 {
     "require": {
-        "jcf/getsentry": "1.0.0"
+        "jcf/getsentry": "1.1.*"
     }
 }
 ```
@@ -52,9 +52,14 @@ Then set the environments that should be reported to Sentry.
     'environments' => ['stagging', 'production'],
 ```
 
-Finally set the log levels that should be reported to Sentry.
+Set the log levels that should be reported to Sentry.
 ```php
     'environments' => ['error', 'emergency', 'notice', 'info', 'debug'],
+```
+
+Set if Sentry Event ID should be saved in session. This is useful if you want to share the event ID with your users.
+```php
+    'saveEventId' => true,
 ```
 
 ## Usage
@@ -63,18 +68,18 @@ Automatically every message that will be logged by Laravel and that fits in rule
 If you need, you may also trigger Laravel log mannualy and pass extra data to Sentry.
 
 ```php
-	// Debug with User and Extra Data 
+	// Debug with User and Extra Data
     \Log::debug('Debugging', [
 	'user' => [
 		'id' => 99,
 		'email' => 'joao@3eengenharia.com.br',
 		'data' =>[
-			'Member Since' => '2011-09-07' 
+			'Member Since' => '2011-09-07'
 		]
 	]
 	, 'extra' => ['Ammount' => '142', 'Membership' => 'Activated']]
     );
-		
+
     // Debug with User
     \Log::debug('Debug bug!', ['user' => 'jotafurtado']);
 
@@ -83,4 +88,10 @@ If you need, you may also trigger Laravel log mannualy and pass extra data to Se
 
     // Simple Error
     \Log::error('Image not saved.');
+```
+
+To retrieve event ID use the code:
+
+```
+ \Session::get('sentryEventId');
 ```

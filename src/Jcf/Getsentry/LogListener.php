@@ -6,9 +6,10 @@ class LogListener
 
     public static function getConfigs()
     {
-        $config['dsn'] = \Config::get('services.raven.dsn') ?: \Config::get('getsentry::dsn');
-        $config['environments'] = \Config::get('services.raven.environments') ?: \Config::get('getsentry::environments');
-        $config['levels'] = \Config::get('services.raven.levels') ?: \Config::get('getsentry::levels');
+        $config['dsn'] = \Config::get('getsentry::dsn');
+        $config['environments'] = \Config::get('getsentry::environments');
+        $config['levels'] = \Config::get('getsentry::levels');
+        $config['saveEventId'] = \Config::get('getsentry::saveEventId', false);
         return $config;
     }
 
@@ -18,9 +19,9 @@ class LogListener
         $config = self::getConfigs();
 
         if (in_array(\App::environment(), $config['environments'])) {
-            $raven = new \Raven_Client($config['dsn']);
+            $raven = (new \Raven_Client($config['dsn']))->install();
             $levels = $config['levels'];
-            \Event::listen('illuminate.log', function ($level, $message, $context) use ($raven, $levels) {
+            \Event::listen('illuminate.log', function ($level, $message, $context) use ($raven, $levels, $config) {
 
                 if (in_array($level, $levels)) {
                     $context['level'] = $level;
@@ -31,8 +32,12 @@ class LogListener
                         } else {
                             $raven->set_user_data($context['user']);
                         }
-                        if ($message instanceof Exception) {
-                            $raven->captureException($message, $context);
+                    }
+
+                    if ($message instanceof \Exception) {
+                        $eventId = $raven->captureException($message, $context);
+                        if ($config['saveEventId']) {
+                            \Session::flash('sentryEventId', $eventId);
                         }
                     } else {
                         $raven->captureMessage($message, null, $context);

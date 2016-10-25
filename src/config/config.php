@@ -1,6 +1,6 @@
 <?php
 return array(
-    
+
     /*
     |--------------------------------------------------------------------------
     | Raven DSN
@@ -10,7 +10,7 @@ return array(
     |
     */
 	'dsn' => '',
-	
+
 	/*
     |--------------------------------------------------------------------------
     | Environments
@@ -29,6 +29,17 @@ return array(
     | Log levels that should be reported to Sentry
     |
     */
-	'levels' => ['debug', 'info', 'error', 'notice', 'warning', 'error', 'critical', 'alert', 'emergency']
+	'levels' => ['debug', 'info', 'error', 'notice', 'warning', 'error', 'critical', 'alert', 'emergency'],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Save Event ID
+    |--------------------------------------------------------------------------
+    |
+    | If the event ID is going to be saved in session. To retrieve use \Session::get('sentryEventId');
+    |
+    */
+	'saveEventId' => false,
+
 
 );
